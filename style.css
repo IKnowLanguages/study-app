@@ -1,0 +1,30 @@
+.titleBar{
+  height: 50px;
+  width: 100%;
+  background-color: #00bbff;
+  -webkit-app-region: drag;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title{
+  font-family: "Poppins" , sans-serif;
+  font-weight: 1000;
+  font-size: 190%;
+  color: #8fe1ff;
+}
+
+body{
+  background-color: #1b1b1b;
+}
+
+.question_text{
+  font-family: "Poppins" , sans-serif;
+  position: relative;
+  top: 50px;
+  left: 41%;
+  font-weight: 900;
+  font-size: 300%;
+  color: #8fe1ff;
+}
