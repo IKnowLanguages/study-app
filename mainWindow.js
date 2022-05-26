@@ -4,21 +4,28 @@ const path = require("path");
 const { ipcMain, ipcRenderer } = require("electron");
 
 global.questions = [];
+
 function Submit(todo) {
   if (todo == 1) {
     let question = document.getElementById("question").value;
     let answer = document.getElementById("answer").value;
     if (question.trim() == "" || answer.trim() == "") {
-      alert("Question or answer can't be blank");
-      document.getElementById("question").value = "";
-      document.getElementById("answer").value = "";
+      document.getElementById("text-alert").innerHTML =
+        "You can't keep any of the fields empty";
+      setTimeout(() => {
+        document.getElementById("question").value = "";
+        document.getElementById("answer").value = "";
+      }, 5000);
     } else {
       console.log(question);
       console.log(answer);
-      global.questions.push(question.trim());
-      global.questions.push(answer.trim());
-      console.log(global.questions);
-
+      if (question === answer) {
+        console.log();
+      } else {
+        global.questions.push(question.trim());
+        global.questions.push(answer.trim());
+        console.log(global.questions);
+      }
       ipcRenderer.send("the-questions");
     }
   } else {
