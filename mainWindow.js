@@ -10,6 +10,7 @@ function Submit(todo) {
     let question = document.getElementById("question").value;
     let answer = document.getElementById("answer").value;
     if (question.trim() == "" || answer.trim() == "") {
+      ipcRenderer.send("error", "question and answer can't be the same");
       document.getElementById("text-alert").innerHTML =
         "You can't keep any of the fields empty";
       setTimeout(() => {
@@ -20,7 +21,7 @@ function Submit(todo) {
       console.log(question);
       console.log(answer);
       if (question === answer) {
-        console.log();
+        ipcRenderer.send("error", "question and answer can't be the same");
       } else {
         global.questions.push(question.trim());
         global.questions.push(answer.trim());
