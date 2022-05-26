@@ -10,6 +10,8 @@ function Submit(todo) {
     let answer = document.getElementById("answer").value;
     if (question.trim() == "" || answer.trim() == "") {
       alert("Question or answer can't be blank");
+      document.getElementById("question").value = "";
+      document.getElementById("answer").value = "";
     } else {
       console.log(question);
       console.log(answer);
