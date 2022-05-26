@@ -55,6 +55,19 @@ function createWindowQuiz() {
   );
 }
 
+global.questions_ = [];
+ipcMain.on("questions", (_, _questions) => {
+  console.log(_questions);
+  global.questions_.push(_questions[0]);
+  global.questions_.push(_questions[1]);
+  global.questions_ = global.questions_.filter(function (element) {
+    return element !== undefined;
+  });
+  global.questions_ = [...new Set(global.questions_)];
+  console.log("questions =");
+  console.log(global.questions_);
+});
+
 const mainMenuTemplate = [
   {
     label: "File",
@@ -90,12 +103,3 @@ if (process.env.NODE_ENV !== "production") {
 
 menu = Menu.buildFromTemplate(mainMenuTemplate);
 Menu.setApplicationMenu(menu);
-global.questions_ = [];
-ipcMain.on("questions", (_, _questions) => {
-  console.log(_questions);
-  global.questions_.push(_questions[0]);
-  global.questions_.push(_questions[1]);
-  global.questions_ = [...new Set(global.questions_)];
-  console.log("questions =");
-  console.log(global.questions_);
-});
