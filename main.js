@@ -57,7 +57,7 @@ function createWindowQuiz() {
 
 global.questions_ = [];
 ipcMain.on("questions", (_, _questions) => {
-  console.log(_questions);
+  console.log(1, _questions);
   global.questions_.push(_questions[0]);
   global.questions_.push(_questions[1]);
   global.questions_ = global.questions_.filter(function (element) {
