@@ -3,7 +3,7 @@ const url = require("url");
 const path = require("path");
 const { ipcMain } = require("electron");
 const { ipcRenderer } = electron;
-const { app, BrowserWindow, Menu, IpcMain } = electron;
+const { app, BrowserWindow, Menu, IpcMain, Notification } = electron;
 
 require("electron-reloader")(module);
 
@@ -103,3 +103,13 @@ if (process.env.NODE_ENV !== "production") {
 
 menu = Menu.buildFromTemplate(mainMenuTemplate);
 Menu.setApplicationMenu(menu);
+
+ipcMain.on("error", function (e, msg) {
+  const NOTIFICATION_TITLE = "Warning";
+  const NOTIFICATION_BODY = msg;
+
+  new Notification({
+    title: NOTIFICATION_TITLE,
+    body: NOTIFICATION_BODY,
+  }).show();
+});
