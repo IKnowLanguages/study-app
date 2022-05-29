@@ -2,6 +2,7 @@ const electron = require("electron");
 const url = require("url");
 const path = require("path");
 const { ipcMain } = require("electron");
+const { normalize } = require("path");
 const { ipcRenderer } = electron;
 const { app, BrowserWindow, Menu, IpcMain, Notification } = electron;
 
@@ -28,6 +29,9 @@ function createWindow() {
       slashes: true,
     })
   );
+  mainWindow.on("close", function () {
+    app.quit();
+  });
 }
 
 app.on("ready", function () {
@@ -43,7 +47,7 @@ function createWindowQuiz() {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
-      preload: path.join(__dirname, "mainWindow.js"),
+      preload: path.join(__dirname, "quizWindow.js"),
     },
   });
   windowForAnswer.loadURL(
@@ -76,6 +80,9 @@ const mainMenuTemplate = [
         label: "Start Quiz",
         click() {
           createWindowQuiz();
+          ipcMain.on("send-the-questions", (e) => {
+            e.reply("questions-sent", global.questions_);
+          });
         },
       },
     ],
@@ -109,7 +116,16 @@ ipcMain.on("error", function (e, msg) {
   const NOTIFICATION_BODY = msg;
 
   new Notification({
+    icon: "logo.png",
+    silent: false,
+    urgency: "low",
+    hasReply: false,
+    closeButtonText: "ok",
     title: NOTIFICATION_TITLE,
     body: NOTIFICATION_BODY,
   }).show();
+});
+
+ipcMain.on("msssg", (e, msg) => {
+  console.log(12345, msg);
 });
