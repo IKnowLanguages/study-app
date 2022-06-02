@@ -79,11 +79,27 @@ const mainMenuTemplate = [
       {
         label: "Start Quiz",
         click() {
-          createWindowQuiz();
-          ipcMain.on("send-the-questions", (e) => {
-            e.reply("questions-sent", global.questions_);
-          });
+          if (global.questions_.length > 0) {
+            createWindowQuiz();
+            ipcMain.on("send-the-questions", (e) => {
+              e.reply("questions-sent", global.questions_);
+            });
+          } else {
+            new Notification({
+              icon: "logo.png",
+              silent: false,
+              urgency: "low",
+              hasReply: false,
+              closeButtonText: "ok",
+              title: "warning",
+              body: "Can't open quiz window without inputting questions",
+            }).show();
+          }
         },
+      },
+      {
+        label: "Start Quiz In Window",
+        role: "reload",
       },
     ],
   },
@@ -128,4 +144,8 @@ ipcMain.on("error", function (e, msg) {
 
 ipcMain.on("msssg", (e, msg) => {
   console.log(12345, msg);
+});
+
+ipcMain.on("abc", (e) => {
+  e.reply("reply");
 });

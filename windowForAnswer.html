@@ -6,11 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
+    <link rel="stylesheet" href="styleQuis.css">
 </head>
 
 <body>
-    <button onclick="clickButton()"></button>
+    <p id="questions-text" class="questions">Press ctrl + R to refresh the page and start the quiz don't press Ctrl + R
+        or reload the page during a session</p>
+    <p id="answer-text" class="answer-text"></p>
+    <div class="grading-buttons" id="answer-status-container" style="display: none">
+        <button class="small-btn" id="correct-btn">Correct</button>
+        <button class="small-btn" id="incorrect-btn">Incorrect</button>
+    </div>
+    <button id="showAnswer-btn" class="showAnswer">Show Answer</button>
     <script src="quizWindow.js"></script>
+
 </body>
 
 </html>

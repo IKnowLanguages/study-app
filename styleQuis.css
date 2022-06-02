@@ -1,0 +1,29 @@
+body {
+    background-color: rgb(37, 37, 37);
+    overflow-x: hidden;
+}
+
+.showAnswer {
+    position: relative;
+    top: 299px;
+    left: 650px;
+}
+
+.answer-text {
+    color: aqua;
+}
+
+.questions {
+    color: rgb(0, 195, 255);
+    left: 9650px;
+}
+
+.small-btn {
+    padding: 10px 100px;
+}
+
+.grading-buttons {
+    position: relative;
+    top: 200px;
+    left: 30%;
+}
