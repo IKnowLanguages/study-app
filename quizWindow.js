@@ -141,5 +141,7 @@ function incorrectButton() {
   }
 }
 
+questionText_.innerHTML = global.questions[indexOfQuestions];
+
 correctButton();
 incorrectButton();

@@ -1,7 +1,7 @@
 const electron = require("electron");
 const url = require("url");
 const path = require("path");
-const { ipcMain, ipcRenderer } = require("electron");
+const { ipcMain, ipcRenderer } = electron;
 
 global.questions = [];
 

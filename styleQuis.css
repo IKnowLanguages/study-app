@@ -1,12 +1,19 @@
 body {
-    background-color: rgb(37, 37, 37);
+    background-color: #006E90;
     overflow-x: hidden;
 }
 
 .showAnswer {
     position: relative;
-    top: 299px;
-    left: 650px;
+    top: 350px;
+    left: 670px;
+    height: 120px;
+    width: 220px;
+    background-color: #99c24d;
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-size: 200%;
+    color: #f18401;
 }
 
 .answer-text {
@@ -15,22 +22,31 @@ body {
 
 .questions {
     color: rgb(0, 195, 255);
-    left: 9650px;
 }
 
 .small-btn {
     padding: 10px 100px;
+    background-color: #f18401;
+    font-weight: 900;
+    color: #99c24d;
+    font-family: "Poppins", sans-serif;
+    font-size: 150%;
 }
 
 .grading-buttons {
     position: relative;
-    top: 200px;
-    left: 30%;
+    top: 300px;
+    left: 32%;
 }
 
 .questions {
     font-family: "Poppins", sans-serif;
     position: relative;
-    left: 48%;
-    font-weight: 900%;
+    left: 47%;
+    font-weight: 900;
+    font-size: 200%;
+}
+
+.showAnswer:hover {
+    background-color: #8ec922;
 }

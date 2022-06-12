@@ -2,10 +2,11 @@ const electron = require("electron");
 const url = require("url");
 const path = require("path");
 const { ipcMain } = require("electron");
-const { normalize } = require("path");
 const { ipcRenderer } = electron;
 const { app, BrowserWindow, Menu, IpcMain, Notification } = electron;
+const Store = require("electron-store");
 
+let store = new Store();
 require("electron-reloader")(module);
 
 let mainWindow;
@@ -59,7 +60,7 @@ function createWindowQuiz() {
   );
 }
 
-global.questions_ = [];
+global.questions_ = store.get("unicorn");
 ipcMain.on("questions", (_, _questions) => {
   console.log(1, _questions);
   global.questions_.push(_questions[0]);
@@ -70,6 +71,8 @@ ipcMain.on("questions", (_, _questions) => {
   global.questions_ = [...new Set(global.questions_)];
   console.log("questions =");
   console.log(global.questions_);
+  store.set("unicorn", global.questions_);
+  console.log(store.get("unicorn"));
 });
 
 const mainMenuTemplate = [
@@ -95,6 +98,14 @@ const mainMenuTemplate = [
               body: "Can't open quiz window without inputting questions",
             }).show();
           }
+        },
+      },
+      {
+        label: "Clear All Questions",
+        click() {
+          global.questions_ = [];
+          store.set("unicorn", global.questions_);
+          console.log(store.get("unicorn"));
         },
       },
       {
@@ -150,4 +161,10 @@ ipcMain.on("abc", (e) => {
   e.reply("reply");
 });
 
-app.on("quit", function () {});
+ipcMain.on("item", (_, item) => {
+  console.log(123, item);
+});
+
+app.on("quit", () => {
+  app.quit();
+});
