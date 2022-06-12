@@ -149,3 +149,5 @@ ipcMain.on("msssg", (e, msg) => {
 ipcMain.on("abc", (e) => {
   e.reply("reply");
 });
+
+app.on("quit", function () {});

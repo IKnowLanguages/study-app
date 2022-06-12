@@ -21,13 +21,25 @@ global.correctCount = 0;
 global.incorrectCount = 0;
 
 if (document.getElementById("questions-text")) {
-  document.getElementById("questions-text").innerHTML =
-    global.questions[indexOfQuestions];
+  global.questions[indexOfQuestions];
 }
 
 function updateAnswer() {
   if (document.getElementById("answer-text")) {
     document.getElementById("answer-text").innerHTML = "";
+  }
+}
+
+function showProgressBar() {
+  if (global.questions) {
+    if (
+      typeof global.correctCount == "number" &&
+      typeof global.incorrectCount == "number"
+    ) {
+      console.log("correct count" + global.correctCount);
+      console.log("incorrect count" + global.incorrectCount);
+      console.log("length" + global.questions.length / 2);
+    }
   }
 }
 
@@ -51,12 +63,13 @@ function updateQuestionIncorrect() {
     } else {
       ipcRenderer.send("error", "No more questions left");
       document.getElementById("questions-text").innerHTML =
-        "press Ctrl + R to restart quiz";
+        "Press Ctrl + R to restart the quiz or close this window if your done";
       document.getElementById("showAnswer-btn").style.display = "none";
       document.getElementById("answer-text").style.display = "none";
       document.getElementById("answer-status-container").style.display = "none";
       incorrectCount++;
       console.log(incorrectCount);
+      showProgressBar();
     }
   }
 }
@@ -87,6 +100,7 @@ function updateQuestionCorrect() {
       document.getElementById("answer-text").style.display = "none";
       document.getElementById("answer-status-container").style.display = "none";
       console.log(correctCount);
+      showProgressBar();
     }
   }
 }
